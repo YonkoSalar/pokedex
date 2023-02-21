@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+  font-family: "Outfit";
+  src: url("./fonts/Outfit-VariableFont_wght.ttf");
+}
+
+html {
+  font-family: Outfit;
+  background-color: #f6f8fc;
+
+
+}
+
