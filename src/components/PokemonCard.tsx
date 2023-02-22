@@ -25,15 +25,13 @@ function PokemonCard(props: any) {
 
   useEffect(() => {
     if (typeof props.PokemonId === "number") {
-      console.log("Animation");
       setIsAnimation(true);
 
       // Set timeout to remove animation
       setTimeout(() => {
         setIsAnimation(false);
 
-        console.log("Animation removed");
-      }, 500);
+      }, 600);
     } else {
       setIsAnimation(false);
     }
@@ -71,10 +69,10 @@ function PokemonCard(props: any) {
   } else if (Pokemon && Pokemon.name && isPokemonLoaded) {
     return (
       <div>
-        <div className=" fixed bottom-0 right-30 gap-2 rounded-xl items-center w-[350px] h-[750px]">
+        <div className=" fixed bottom-0 right-30 gap-2 items-center w-[350px] h-[750px]">
           {transition((style, item) => (
             <animated.div style={style}>
-              <div className="bg-white">
+              <div className="bg-white rounded-xl">
                 <div className="relative flex justify-center ">
                   <img
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${props.PokemonId}.gif`}
@@ -227,7 +225,7 @@ function PokemonCard(props: any) {
                               )}
                             </div>
 
-                            <div className="flex justify-center h-16 w-16">
+                            <div className="flex justify-center h-16 w-16 px-2">
                               <a
                                 className="hover:bg-slate-200 rounded-xl"
                                 href="#"
@@ -259,7 +257,7 @@ function PokemonCard(props: any) {
 
                             {PokemonSecond &&
                               PokemonSecond.name !== undefined && (
-                                <div className="flex justify-center h-16 w-16">
+                                <div className="flex justify-center h-16 w-16 px-2">
                                   <a
                                     className="hover:bg-slate-200 rounded-xl"
                                     href="#"

@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchBar from "./components/SearchBar";
 import PokemonCardList from "./components/PokemonCardList";
 import PokemonCard from "./components/PokemonCard";
-import pokeball from "./images/pokeball-icon.png"
+import pokemon_ball from "./images/pokeball-icon.png";
+import { useSpring, useTransition, animated } from "react-spring";
+import PokemonCardMobile from "./components/PokemonCardMobile";
 
 function App() {
   // Set Search term for pokekom
@@ -19,42 +21,99 @@ function App() {
     setSelectedPokemonId(newSelectedPokemonId);
   };
 
+  // Check screen size for mobile
+  const [isMobile, setIsMobile] = useState(false);
+ 
+  useEffect(() => {
+    const checkMobile = () => {
+      if (window.innerWidth <= 1200) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
+
+
+  // Loading screen
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+  // Transition translate Y
+  const transition = useTransition(loading, {
+    to: { opacity: 1, transform: "translateY(100%)" },
+    from: { opacity: 1, transform: "translateY(0%)" },
+  });
+
+
+  console.log(isMobile);
+  
 
   return (
     <div className="flex flex-row">
-      <div className="px-16 py-20 sm:w-full lg:pl-40 lg:w-2/3">
-
-      <img 
-              src={pokeball}
+      {loading ? (
+        <div >
+          {transition((style, item) => (
+            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
+              <animated.div style={style}>
+                <div className="flex flex-col">
+                  <img
+                    src={pokemon_ball}
+                    alt="pokeball"
+                    className="h-32 w-32 animate-spin"
+                  />
+                </div>
+              </animated.div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <>
+          <div className="px-16 py-20 sm:w-full lg:pl-40 lg:w-2/3">
+            <img
+              src={pokemon_ball}
               className="w-34 h-34 bg-no-repeat absolute -z-10 -left-40 -top-20"
+            />
+            <div>
+              <SearchBar
+                searchTerm={searchTerm}
+                onSearchTermChange={handleSearchTermChange}
+              />
+            </div>
+            <div>
+              <PokemonCardList
+                searchTerm={searchTerm}
+                onSelectedPokemonChange={handleSelectedPokemonChange}
+              />
+            </div>
+          </div>
+          <div>
 
-          />
-
-        {/* Search Bar for rendering new pokemons */}
-        <div>
-          <SearchBar
-            searchTerm={searchTerm}
-            onSearchTermChange={handleSearchTermChange}
-          />
-        </div>
-
-        {/* Render Pokemon List */}
-        <div>
-          <PokemonCardList
-            searchTerm={searchTerm}
-            onSelectedPokemonChange={handleSelectedPokemonChange}
-          />
-        </div>
-      </div>
-
-      {/* Render Pokemon Details */}
-      <div className="">
-        <PokemonCard
-          PokemonId={selectedPokemonId}
-          onSelectedPokemonChange={handleSelectedPokemonChange}
-        />
-      </div>
+            {/* If mobile, hide pokemon card */}
+            {isMobile ? (
+              <PokemonCardMobile 
+              PokemonId={selectedPokemonId}
+              onSelectedPokemonChange={handleSelectedPokemonChange}
+              
+              />
+            ) : (
+            <PokemonCard
+              PokemonId={selectedPokemonId}
+              onSelectedPokemonChange={handleSelectedPokemonChange}
+            />
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

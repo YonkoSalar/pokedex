@@ -12,16 +12,9 @@ export function FetchEvolutionChain(pokemon: any, pokedex_entry: any){
     const [PokemonStart, setStartPokemon] = useState([]);
     const [PokemonFirst, setFirstPokemon] = useState([]);
     const [PokemonSecond, setSecondPokemon] = useState([]);
-
-
-  
-  
   
  
     useEffect(() => {
-
-     
-
       if (pokedex_entry && pokedex_entry.evolution_chain && pokedex_entry.evolution_chain.url) {
         // Fetch evolution chain
         fetch(pokedex_entry.evolution_chain.url)
@@ -75,7 +68,7 @@ export function FetchEvolutionChain(pokemon: any, pokedex_entry: any){
 
           .catch((error) => console.error(error));
         }
-      }, [pokemon, pokedex_entry, PokemonStart, PokemonFirst, PokemonSecond, evolutionChain]);
+      }, [pokemon, pokedex_entry, evolutionChain]);
 
 
 
