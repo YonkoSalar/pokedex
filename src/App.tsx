@@ -5,6 +5,7 @@ import PokemonCard from "./components/PokemonCard";
 import pokemon_ball from "./images/pokeball-icon.png";
 import { useSpring, useTransition, animated } from "react-spring";
 import PokemonCardMobile from "./components/PokemonCardMobile";
+import {motion} from 'framer-motion'
 
 function App() {
   // Set Search term for pokekom
@@ -54,8 +55,26 @@ function App() {
     from: { opacity: 1, transform: "translateY(0%)" },
   });
 
+  // Framer motion animation for open and close
+  const variants = {
+    open: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.2, // adjust duration as needed
+        ease: "linear", // use a linear easing function
+      },
+    },
+    closed: {
+      opacity: 0,
+      y: "100%",
+      transition: {
+        duration: 0.2, // adjust duration as needed
+        ease: "linear", // use a linear easing function
+      },
+    },
+  };
 
-  console.log(isMobile);
   
 
   return (
@@ -63,7 +82,7 @@ function App() {
       {loading ? (
         <div >
           {transition((style, item) => (
-            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
+            <div className="fixed top-1isModalOpen/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center">
               <animated.div style={style}>
                 <div className="flex flex-col">
                   <img
