@@ -30,8 +30,7 @@ function PokemonCard(props: any) {
       // Set timeout to remove animation
       setTimeout(() => {
         setIsAnimation(false);
-
-      }, 600);
+      }, 650);
     } else {
       setIsAnimation(false);
     }
@@ -41,7 +40,7 @@ function PokemonCard(props: any) {
     from: { transform: "translateX(200%)", opacity: 0 },
     enter: { transform: "translateX(0%)", opacity: 1 },
     leave: { transform: "translateX(200%)", opacity: 0 },
-  reverse: !isAnimation
+    reverse: !isAnimation,
   });
 
   // If not loaded show loading screen
@@ -66,7 +65,7 @@ function PokemonCard(props: any) {
         </div>
       </div>
     );
-  } else if (Pokemon && Pokemon.name && isPokemonLoaded) {
+  } else if (Pokemon && Pokemon.name && isPokemonLoaded && evolutionChain) {
     return (
       <div>
         <div className=" fixed bottom-0 right-30 gap-2 items-center w-[350px] h-[750px]">
@@ -139,14 +138,30 @@ function PokemonCard(props: any) {
                     <div className="w-40">
                       <h2 className="pb-2 font-bold">HEIGHT</h2>
                       <div className="py-1 border rounded-2xl bg-slate-100 ">
-                        <p className="mx-auto text-sm">{Pokemon.height}m</p>
+                      <p className="mx-auto text-sm">
+                          {Pokemon.height
+                            .toFixed(1)
+                            .toString()
+                            .split(".")
+                            .map((part, i) => (i === 0 ? part : `.${part}`))
+                            .join("")}
+                          kg
+                        </p>
                       </div>
                     </div>
 
                     <div className="w-40">
                       <h2 className="pb-2 font-bold">WEIGHT</h2>
                       <div className="  flex justify-between py-1 border rounded-2xl bg-slate-100">
-                        <p className="mx-auto text-sm">{Pokemon.weight}kg</p>
+                        <p className="mx-auto text-sm">
+                          {Pokemon.weight
+                            .toFixed(1)
+                            .toString()
+                            .split(".")
+                            .map((part, i) => (i === 0 ? part : `.${part}`))
+                            .join("")}
+                          kg
+                        </p>
                       </div>
                     </div>
                   </div>

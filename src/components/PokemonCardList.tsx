@@ -47,7 +47,7 @@ function PokemonCardList(props: any) {
         {pokemons
           .sort((a, b) => a.id - b.id)
           .map((pokemon, index) => (
-            <div className="mx-2 mb-10 w-60 h-36 bg-white border-gray-200 rounded-3xl cursor-pointer shadow dark:bg-gray-800 dark:border-gray-700 text-center hover:scale-105">
+            <div className="mx-2 mb-10 w-60 h-36 bg-white border-gray-200 rounded-3xl cursor-pointer shadow dark:bg-gray-800 dark:border-gray-700 text-center hover:scale-105 hover:border-2">
               <a
                 key={index}
                 // On click get pokemon ID
