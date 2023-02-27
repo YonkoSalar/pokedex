@@ -108,7 +108,7 @@ function App() {
               <PokemonCard
                 PokemonId={selectedPokemonId}
                 onSelectedPokemonChange={handleSelectedPokemonChange}
-              />
+              /> 
             )}
           </div>
         </>

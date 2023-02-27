@@ -205,9 +205,9 @@ function PokemonCard(props: any) {
 
                   <div className="flex flex-col justify-center py-4 pt-4 pb-40">
                     {PokemonFirst &&
-                      PokemonStart.sprites &&
-                      PokemonStart.sprites.front_default &&
-                      PokemonFirst.name !== undefined && (
+                      PokemonStart["sprites"] &&
+                      PokemonStart["sprites"].front_default &&
+                      PokemonFirst["name"] !== undefined && (
                         <div className="flex flex-col justify-center">
                           <h2 className="pt-2 font-bold mx-auto">EVOLUTION</h2>
                           <div className="flex flex-row justify-center items-center p-2">
@@ -217,15 +217,15 @@ function PokemonCard(props: any) {
                                   className="hover:bg-slate-200 rounded-xl"
                                   href="#"
                                   onClick={() => {
-                                    props.onSelectedPokemonChange(PokemonStart.id)
+                                    props.onSelectedPokemonChange(PokemonStart["id"])
                                   }}
                                   
 
                                 >
-                                  {PokemonStart.sprites &&
-                                    PokemonStart.sprites.front_default && (
+                                  {PokemonStart["sprites"] &&
+                                    PokemonStart["sprites"].front_default && (
                                       <img
-                                        src={PokemonStart.sprites.front_default}
+                                        src={PokemonStart["sprites"].front_default}
                                         className="h-16 w-16 mx-auto"
                                       />
                                     )}
@@ -250,15 +250,15 @@ function PokemonCard(props: any) {
                                 className="hover:bg-slate-200 rounded-xl"
                                 href="#"
                                 onClick={() => {
-                                  props.onSelectedPokemonChange(PokemonFirst.id)
+                                  props.onSelectedPokemonChange(PokemonFirst["id"])
                                   
                                 }}
 
                               >
-                                {PokemonFirst.sprites &&
-                                  PokemonFirst.sprites.front_default && (
+                                {PokemonFirst["sprites"] &&
+                                  PokemonFirst["sprites"].front_default && (
                                     <img
-                                      src={PokemonFirst.sprites.front_default}
+                                      src={PokemonFirst["sprites"].front_default}
                                       className="h-16 w-16 mx-auto"
                                     />
                                   )}
@@ -266,7 +266,7 @@ function PokemonCard(props: any) {
                             </div>
 
                             {PokemonSecond &&
-                              PokemonSecond.name !== undefined && (
+                              PokemonSecond["name"] !== undefined && (
                                 <div className="flex justify-center items-center ">
                                   {pokemonSpecies.second.min_level === 0 ? (
                                     <p className="px-4 py-1 bg-slate-300 rounded-full text-xs">
@@ -281,22 +281,23 @@ function PokemonCard(props: any) {
                               )}
 
                             {PokemonSecond &&
-                              PokemonSecond.name !== undefined && (
+                              PokemonSecond["name"] !== undefined && (
                                 <div className="flex justify-center h-16 w-16 px-2">
                                   <a
                                     className="hover:bg-slate-200 rounded-xl"
                                     href="#"
                                     onClick={() => {
                                       props.onSelectedPokemonChange(
-                                        PokemonSecond.id
+                                        PokemonSecond["id"]
                                       )
+                                      
                                     }}
                                   >
-                                    {PokemonSecond.sprites &&
-                                      PokemonSecond.sprites.front_default && (
+                                    {PokemonSecond["sprites"] &&
+                                      PokemonSecond["sprites"].front_default && (
                                         <img
                                           src={
-                                            PokemonSecond.sprites.front_default
+                                            PokemonSecond["sprites"].front_default
                                           }
                                           className="h-16 w-16 mx-auto"
                                         />
@@ -316,6 +317,13 @@ function PokemonCard(props: any) {
       </div>
     );
   }
+
+  return (
+    <div className="flex flex-col justify-center items-center">
+      <p>Loading...</p>
+    </div>
+  );
+  
 }
 
 export default PokemonCard;

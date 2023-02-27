@@ -7,7 +7,14 @@ import * as constants from "../data/constants";
 import { AiOutlineEyeInvisible, AiOutlineClose } from "react-icons/ai";
 import { motion } from "framer-motion";
 
-function PokemonCardMobile(props: any) {
+type PokemonStart = {
+  start: string;
+  first: string;
+  second: string;
+} | any[];
+
+
+function PokemonCardMobile(props: any) : JSX.Element | null {
   // Fetch information from pokemon ID
   const [isPokemonLoaded, Pokemon, Pokedex_entry] = FetchPokemon({
     PokemonId: props.PokemonId,
@@ -19,6 +26,8 @@ function PokemonCardMobile(props: any) {
   // Fetch evolution chain
   const [evolutionChain, PokemonStart, PokemonFirst, PokemonSecond] =
     FetchEvolutionChain(props.PokemonId, Pokedex_entry);
+
+ 
 
   // State to track if the modal is open or not
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,7 +48,6 @@ function PokemonCardMobile(props: any) {
     setTimeout(() => {
       setIsModalOpen(false);
     }, 600);
-
   };
 
   // Disable scrolling when modal is open
@@ -74,14 +82,9 @@ function PokemonCardMobile(props: any) {
   // Animation states for the modal
   const [isOpenAnimation, setIsOpenAnimation] = useState(false);
 
-  
-  if(Pokemon && Pokedex_entry && pokemonSpecies && isModalOpen)
-  {
-  return (
-
-    <div className="fixed right-0 left-0 bottom-0">
-    
-      
+  if (Pokemon && Pokedex_entry && pokemonSpecies && isModalOpen) {
+    return (
+      <div className="fixed right-0 left-0 bottom-0">
         <motion.div
           initial={{ opacity: 0, y: "100%" }}
           animate={isOpenAnimation ? "open" : "closed"}
@@ -210,9 +213,9 @@ function PokemonCardMobile(props: any) {
 
               <div className="flex flex-col justify-center py-4 pt-4 ">
                 {PokemonFirst &&
-                  PokemonStart.sprites &&
-                  PokemonStart.sprites.front_default &&
-                  PokemonFirst.name !== undefined && (
+                  typeof PokemonStart === "object" &&
+                  PokemonStart["sprites"].front_default &&
+                  PokemonFirst["name"] !== undefined && (
                     <div className="flex flex-col justify-center">
                       <h2 className="pt-2 font-bold mx-auto">EVOLUTION</h2>
                       <div className="flex flex-row justify-center items-center p-2">
@@ -223,13 +226,10 @@ function PokemonCardMobile(props: any) {
                               className="hover:bg-slate-200 rounded-xl"
                               href="#"
                             >
-                              {PokemonStart.sprites &&
-                                PokemonStart.sprites.front_default && (
-                                  <img
-                                    src={PokemonStart.sprites.front_default}
-                                    className="h-16 w-16 mx-auto"
-                                  />
-                                )}
+                              <img
+                                src={PokemonStart["sprites"].front_default}
+                                className="h-16 w-16 mx-auto"
+                              />
                             </a>
                           </div>
                         </div>
@@ -248,17 +248,17 @@ function PokemonCardMobile(props: any) {
 
                         <div className="flex justify-center h-16 w-16 px-2">
                           <a className="hover:bg-slate-200 rounded-xl" href="#">
-                            {PokemonFirst.sprites &&
-                              PokemonFirst.sprites.front_default && (
+                            {PokemonFirst["sprites"] &&
+                              PokemonFirst["sprites"].front_default && (
                                 <img
-                                  src={PokemonFirst.sprites.front_default}
+                                  src={PokemonFirst["sprites"].front_default}
                                   className="h-16 w-16 mx-auto"
                                 />
                               )}
                           </a>
                         </div>
 
-                        {PokemonSecond && PokemonSecond.name !== undefined && (
+                        {PokemonSecond && PokemonSecond["name"] !== undefined && (
                           <div className="flex justify-center items-center ">
                             {pokemonSpecies.second.min_level === 0 ? (
                               <p className="px-4 py-1 bg-slate-300 rounded-full text-xs">
@@ -272,16 +272,16 @@ function PokemonCardMobile(props: any) {
                           </div>
                         )}
 
-                        {PokemonSecond && PokemonSecond.name !== undefined && (
+                        {PokemonSecond && PokemonSecond["name"] !== undefined && (
                           <div className="flex justify-center h-16 w-16 px-2">
                             <a
                               className="hover:bg-slate-200 rounded-xl"
                               href="#"
                             >
-                              {PokemonSecond.sprites &&
-                                PokemonSecond.sprites.front_default && (
+                              {PokemonSecond["sprites"] &&
+                                PokemonSecond["sprites"].front_default && (
                                   <img
-                                    src={PokemonSecond.sprites.front_default}
+                                    src={PokemonSecond["sprites"].front_default}
                                     className="h-16 w-16 mx-auto"
                                   />
                                 )}
@@ -295,10 +295,17 @@ function PokemonCardMobile(props: any) {
             </div>
           </div>
         </motion.div>
-      
+      </div>
+    ) ;
+
+  } 
+
+  return (
+    <div className="flex flex-col justify-center items-center">
+      <p>Loading..</p>
     </div>
   );
-                                }
+
 }
 
 export default PokemonCardMobile;

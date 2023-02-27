@@ -70,7 +70,7 @@ function PokemonCardList(props: any) {
                       pokemon.name.slice(1)}
                   </p>
                   <div className="flex justify-center">
-                    {pokemon.types.map((type:any, index:any) => (
+                    {pokemon["types"].map((type:any, index:any) => (
                       <span
                         key={index}
                         className={`px-2 py-1 text-xs m-1 font-semibold leading-tight text-gray-700 ${

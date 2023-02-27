@@ -1,16 +1,30 @@
 import { useEffect, useState } from "react";
 
+
+// Add types
+interface Pokemon {
+  id: number;
+  name: string;
+  stats: Array<{
+    base_stat: number;
+    stat: {
+      name: string;
+    };
+  }>;
+}
+
+
 // Fetch pokemon based on ID
 export function FetchPokemon({PokemonId} : {PokemonId: number}): [boolean, any, any]
 {
     const [isLoaded, setIsLoaded] = useState(false);
-    const [pokemon, setPokemon] = useState();
+    const [pokemon, setPokemon] = useState<Pokemon>();
     const [pokedex_entry, setPokedex_entry] = useState();
 
-    /////////////
+  
     useEffect(() => {
         if(PokemonId){
-          const promises = [];
+          const promises: Array<Promise<any>> = [];
       
           promises.push(
             fetch(`https://pokeapi.co/api/v2/pokemon/${PokemonId}`).then((res) => res.json())

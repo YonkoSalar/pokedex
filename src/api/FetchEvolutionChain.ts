@@ -7,12 +7,20 @@ import { useEffect, useState } from "react";
 export function FetchEvolutionChain(pokemon: any, pokedex_entry: any){
 
     // Evolution chain
-    const [evolutionChain, setEvolutionChain] = useState([]);
+    const [evolutionChain, setEvolutionChain] = useState({
 
-    const [PokemonStart, setStartPokemon] = useState([]);
-    const [PokemonFirst, setFirstPokemon] = useState([]);
-    const [PokemonSecond, setSecondPokemon] = useState([]);
-  
+
+      start: "",
+      first: "",
+      second: "",
+    });
+    
+
+    const [PokemonStart, setStartPokemon] = useState<any[]>([]);
+    const [PokemonFirst, setFirstPokemon] = useState<any[]>([]);
+    const [PokemonSecond, setSecondPokemon] = useState<any[]>([]);
+
+    
  
     useEffect(() => {
       if (pokedex_entry && pokedex_entry.evolution_chain && pokedex_entry.evolution_chain.url) {
