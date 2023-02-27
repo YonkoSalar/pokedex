@@ -43,6 +43,7 @@ function PokemonCard(props: any) {
     reverse: !isAnimation,
   });
 
+
   // If not loaded show loading screen
   if (!props.PokemonId) {
     return (
@@ -213,9 +214,13 @@ function PokemonCard(props: any) {
                             <div className="flex justify-center">
                               <div className="flex justify-center px-2 w-16 h-16">
                                 <a
-                                  // onClick={getPokemonButton(PokemonStart.id)}
                                   className="hover:bg-slate-200 rounded-xl"
                                   href="#"
+                                  onClick={() => {
+                                    props.onSelectedPokemonChange(PokemonStart.id)
+                                  }}
+                                  
+
                                 >
                                   {PokemonStart.sprites &&
                                     PokemonStart.sprites.front_default && (
@@ -244,6 +249,11 @@ function PokemonCard(props: any) {
                               <a
                                 className="hover:bg-slate-200 rounded-xl"
                                 href="#"
+                                onClick={() => {
+                                  props.onSelectedPokemonChange(PokemonFirst.id)
+                                  
+                                }}
+
                               >
                                 {PokemonFirst.sprites &&
                                   PokemonFirst.sprites.front_default && (
@@ -276,6 +286,11 @@ function PokemonCard(props: any) {
                                   <a
                                     className="hover:bg-slate-200 rounded-xl"
                                     href="#"
+                                    onClick={() => {
+                                      props.onSelectedPokemonChange(
+                                        PokemonSecond.id
+                                      )
+                                    }}
                                   >
                                     {PokemonSecond.sprites &&
                                       PokemonSecond.sprites.front_default && (

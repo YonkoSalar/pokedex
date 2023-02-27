@@ -106,7 +106,7 @@ function PokemonCardMobile(props: any) {
             <div className="relative flex justify-center ">
               <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${props.PokemonId}.gif`}
-                className=" w-36 h-36 -mt-20 z-10"
+                className=" w-36 h-36 -mt-36 z-10"
               />
             </div>
             <div className="rounded-lg shadow-lg p-4 ">

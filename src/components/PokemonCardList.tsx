@@ -52,7 +52,6 @@ function PokemonCardList(props: any) {
                 key={index}
                 // On click get pokemon ID
                 onClick={() => handleChange(pokemon.id)}
-
                 className=""
               >
                 <img
