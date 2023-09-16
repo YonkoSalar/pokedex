@@ -320,7 +320,7 @@ function PokemonCard(props: any) {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <p>Loading...</p>
+      <p></p>
     </div>
   );
   
