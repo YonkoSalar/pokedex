@@ -30,7 +30,7 @@ function PokemonCard(props: any) {
       // Set timeout to remove animation
       setTimeout(() => {
         setIsAnimation(false);
-      }, 650);
+      }, 450);
     } else {
       setIsAnimation(false);
     }
